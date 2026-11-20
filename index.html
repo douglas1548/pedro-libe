@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedro Libe · Contrate o Show</title>
+<meta name="description" content="Contrate o show de Pedro Libe: mais de 40 milhões de streams, 37 milhões de views no YouTube e finalista do Prêmio Multishow. Agenda 2026 aberta para exposições, festivais, casas de show e eventos particulares.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#000;
+    --cream:#FEF2DC;
+    --orange:#FFAF00;
+    --amber:#E8920C;
+    --brown:#3E2119;
+    --ink:#1A1310;
+    --grad:linear-gradient(90deg,#3E2119 0%,#9A5A1E 45%,#FFAF00 100%);
+    --gutter:clamp(16px,5vw,72px);
+    --wa:#25D366;
+    /* ritmo de espaçamento único para o site todo */
+    --sec-top:clamp(92px,9vw,128px);     /* topo da seção (já conta o menu fixo) */
+    --sec-bottom:clamp(104px,9.5vw,140px);/* base da seção (deixa respiro para a faixa "Agenda · 2026") */
+    --head-gap:clamp(32px,4vw,56px);     /* título da seção → conteúdo */
+    --block-gap:clamp(20px,2.4vw,32px);  /* entre cartões / colunas */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Archivo",system-ui,sans-serif;background:var(--black);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ---------- peças compartilhadas ---------- */
+  .slide{position:relative;overflow:hidden;padding:var(--sec-top) var(--gutter) var(--sec-bottom)}
+  .slide > *:not(.giant):not(.meta):not(.sun){max-width:1240px;margin-left:auto;margin-right:auto}
+  .slide h2.script{margin-top:-.14em}
+  .giant{position:absolute;left:-1%;font-family:"Anton",sans-serif;text-transform:uppercase;line-height:.8;
+    font-size:clamp(160px,34vw,560px);letter-spacing:-.01em;white-space:nowrap;pointer-events:none;user-select:none;z-index:0}
+  .script{font-family:"Yellowtail",cursive;font-weight:400;line-height:1;font-size:clamp(56px,9vw,128px);
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding:.08em .12em .18em 0}
+  .script.dark{background:none;color:var(--ink)}
+  .script.gold{background:linear-gradient(90deg,#c9781a,#FFAF00);-webkit-background-clip:text;background-clip:text}
+  .meta{position:absolute;left:var(--gutter);right:var(--gutter);bottom:clamp(20px,3vw,34px);display:flex;justify-content:space-between;
+    font-weight:600;font-size:clamp(11px,1.1vw,14px);letter-spacing:.32em;text-transform:uppercase;z-index:3}
+  .tag{display:inline-block;background:var(--orange);color:var(--ink);font-weight:700;letter-spacing:.38em;text-transform:uppercase;
+    font-size:clamp(10px,1vw,13px);padding:.7em 1.4em .7em 1.8em}
+  .tag.black{background:var(--black);color:#fff}
+  .stat{font-weight:900;letter-spacing:-.02em;line-height:1;font-size:clamp(40px,5.4vw,78px)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;font-weight:800;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;
+    font-size:14px;padding:1.1em 1.7em;background:var(--black);color:#fff;border:0;cursor:pointer;font-family:inherit;transition:transform .2s,background .2s,color .2s}
+  .btn:hover{transform:translateY(-2px);background:var(--brown)}
+  .btn.orange{background:var(--orange);color:var(--ink)}
+  .btn.orange:hover{background:#ffc23d}
+  .btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+  .btn.ghost:hover{background:#fff;color:#000}
+  .lead{position:relative;z-index:2;max-width:620px;font-size:clamp(16px,1.3vw,19px);line-height:1.6}
+  .center{text-align:center;margin-left:auto;margin-right:auto}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+  /* ---------- nav ---------- */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:20px;
+    padding:18px var(--gutter);transition:background .3s,padding .3s}
+  .nav.solid{background:rgba(0,0,0,.88);backdrop-filter:blur(10px);padding-top:10px;padding-bottom:10px}
+  .brand{font-family:"Anton",sans-serif;font-size:22px;letter-spacing:.06em;color:#fff;text-decoration:none;line-height:.9}
+  .brand span{color:var(--orange)}
+  .nav ul{display:flex;align-items:center;gap:clamp(14px,2vw,30px);list-style:none}
+  .nav ul a{color:#fff;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.85}
+  .nav ul a:hover{opacity:1;color:var(--orange)}
+  .nav ul a.cta{opacity:1;background:var(--orange);color:var(--ink);padding:.95em 1.4em}
+  .nav ul a.cta:hover{background:#ffc23d;color:var(--ink)}
+  .menu-btn{display:none;background:none;border:0;color:#fff;cursor:pointer;padding:6px}
+  @media (max-width:980px){
+    .menu-btn{display:block}
+    .nav ul{position:fixed;inset:64px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;background:#000;padding:8px var(--gutter) 22px;
+      transform:translateY(-130%);transition:transform .35s}
+    .nav.open ul{transform:none}
+    .nav ul a{display:block;padding:15px 0;font-size:14px;border-bottom:1px solid #222}
+    .nav ul a.cta{margin-top:14px;text-align:center;border:0}
+  }
+
+  /* ---------- capa ---------- */
+  .hero{position:relative;background:#000;min-height:max(640px,100vh);overflow:hidden;color:#fff;display:flex;align-items:flex-end;justify-content:center}
+  .hero .giant{top:50%;transform:translateY(-46%);left:-3%;font-size:clamp(220px,40vw,720px);
+    background:linear-gradient(90deg,#2a1610 0%,#4a2716 30%,#8a4d1c 60%,#c47a18 80%,#FFAF00 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .who{position:relative;z-index:2;width:min(58vw,820px);margin:0 auto}
+  .hero .who img{width:100%;height:auto}
+  .hero .left{position:absolute;z-index:3;left:var(--gutter);top:50%;transform:translateY(-30%)}
+  .hero .left .script{font-size:clamp(54px,7.4vw,124px);transform:rotate(-4deg);transform-origin:left;filter:drop-shadow(0 4px 18px rgba(0,0,0,.85))}
+  .hero .left .yr{font-weight:700;letter-spacing:.32em;font-size:clamp(13px,1.3vw,18px);margin:6px 0 0 6px;text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 2px #000}
+  .hero .right{position:absolute;z-index:3;right:var(--gutter);top:50%;transform:translateY(-44%);text-align:left;
+    width:clamp(320px,27vw,420px);padding:clamp(24px,2.4vw,36px);background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-left:4px solid var(--orange);box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+  .hero .right b{display:block;font-family:"Anton",sans-serif;font-weight:400;letter-spacing:.08em;font-size:clamp(30px,2.8vw,44px);line-height:1;margin-bottom:16px}
+  .hero .right p{font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:#eee;margin-bottom:26px}
+  .hero .ctas{display:flex;flex-direction:column;gap:12px}
+  .hero .ctas .btn{padding:1.2em 1.4em}
+  .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:22%;background:linear-gradient(transparent,#000);z-index:2;pointer-events:none}
+  .badge{position:absolute;z-index:4;left:var(--gutter);bottom:clamp(24px,4vw,46px);display:flex;align-items:center;gap:10px;
+    font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+  .badge i{width:10px;height:10px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 0 rgba(37,211,102,.7);animation:pulse 1.8s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 12px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+  @media (max-width:900px){
+    .hero{flex-direction:column;justify-content:flex-end;align-items:stretch;padding-top:230px;min-height:0}
+    .hero .giant{top:44%;font-size:clamp(200px,58vw,420px)}
+    .hero .who{width:min(118vw,620px);margin:0 0 0 50%;transform:translateX(-50%)}
+    .hero .left{top:118px;transform:none}
+    .hero .right{position:absolute;left:var(--gutter);right:var(--gutter);top:auto;bottom:34px;transform:none;width:auto;padding:0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:0;box-shadow:none}
+    .hero .right b{display:none}
+    .hero .right p{display:none}
+    .hero .ctas{flex-direction:row}
+    .hero .ctas .btn{flex:1;padding:1.05em .6em;font-size:12px}
+    .hero::after{height:48%}
+    .badge{bottom:auto;top:84px}
+  }
+
+  /* ---------- números ---------- */
+  .numbers{background:#000;color:#fff;padding:clamp(44px,6vw,72px) var(--gutter);border-top:1px solid #1a1a1a}
+  .numbers .row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;text-align:center}
+  .numbers .stat{font-size:clamp(34px,4.4vw,64px);background:linear-gradient(180deg,#fff 30%,#FFD27a);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .numbers .tag{margin-top:12px;font-size:11px}
+  .numbers h2{text-align:center;font-weight:600;letter-spacing:.32em;text-transform:uppercase;font-size:13px;color:var(--orange);margin-bottom:30px}
+  @media (max-width:760px){.numbers .row{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}}
+
+  /* ---------- o show ---------- */
+  .show{background:var(--cream);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center}
+  .show .pic{position:relative;display:flex;align-items:flex-end;justify-content:center;padding-top:clamp(40px,5vw,70px)}
+  .show .pic .jm{position:absolute;top:0;left:50%;transform:translateX(-50%);font-family:"Anton",sans-serif;line-height:.82;
+    font-size:clamp(200px,24vw,380px);background:linear-gradient(90deg,#9A5A1E,#FFAF00 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .show .pic img{position:relative;width:min(100%,560px);z-index:1}
+  .show p{font-size:clamp(15px,1.15vw,17px);line-height:1.65;margin-bottom:1em;color:#24170f}
+  .show p:last-of-type{margin-bottom:0}
+  .show .ideal-t{margin-top:24px}
+  .show .ideal{margin:12px 0 28px;display:flex;flex-wrap:wrap;gap:10px}
+  .show .ideal span{background:#fff;border:1.5px solid #e9cf9f;padding:.6em 1em;font-weight:700;font-size:13px;letter-spacing:.04em}
+  .show .ideal-t{font-weight:800;letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--amber)}
+  .show{padding-bottom:0}
+  .show .pic{align-self:end}
+  .show .pic img{display:block}
+  .show > .reveal:last-child{padding-bottom:clamp(48px,6vw,96px)}
+  @media (max-width:860px){.show > .reveal:last-child{padding-bottom:var(--sec-bottom)}}
+  @media (max-width:860px){.show{grid-template-columns:1fr}.show .pic{max-width:420px;width:100%;margin:0 auto}}
+
+  /* ---------- fundos laranja ---------- */
+  .warm{background:
+      radial-gradient(120% 90% at 100% 0%,#FFB300 0%,rgba(255,175,0,0) 60%),
+      linear-gradient(200deg,#FFAF00 0%,#E58E10 38%,#8E4A1A 78%,#3E2119 100%);color:var(--ink)}
+  .warm .giant{background:linear-gradient(90deg,#3E2119 0%,rgba(62,33,25,.8) 45%,rgba(110,55,20,.35) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .warm .meta{color:var(--ink)}
+  .head{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:var(--head-gap)}
+  .head .lead{margin-top:6px}
+  .warm .head .lead{font-weight:600}
+
+  /* ---------- formatos ---------- */
+  .formats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--block-gap)}
+  .fmt{background:var(--cream);display:flex;flex-direction:column;box-shadow:0 26px 50px -26px rgba(40,15,0,.75);transition:transform .25s}
+  .fmt:hover{transform:translateY(-6px)}
+  .fmt .img{position:relative;aspect-ratio:16/10;overflow:hidden;background:#000}
+  .fmt .img img{width:100%;height:100%;object-fit:cover}
+  .fmt .num{position:absolute;left:14px;top:10px;font-family:"Anton",sans-serif;font-size:56px;line-height:1;color:var(--orange);text-shadow:0 4px 18px rgba(0,0,0,.5)}
+  .fmt .body{padding:clamp(18px,2vw,28px);display:flex;flex-direction:column;flex:1}
+  .fmt h3{font-weight:900;font-size:clamp(22px,2vw,28px);letter-spacing:-.01em;line-height:1.05;margin-bottom:10px}
+  .fmt p{font-size:15px;line-height:1.55;color:#3a2a20;flex:1;margin-bottom:18px}
+  .fmt ul{list-style:none;margin:0 0 22px;display:grid;gap:8px}
+  .fmt li{font-size:14px;font-weight:600;padding-left:22px;position:relative}
+  .fmt li::before{content:"";position:absolute;left:0;top:.45em;width:10px;height:10px;background:var(--orange)}
+  .fmt .btn{width:100%}
+  @media (max-width:960px){.formats{grid-template-columns:1fr;max-width:560px;margin:0 auto}}
+
+  /* ---------- sucessos (spotify) ---------- */
+  .hits{background:var(--cream)}
+  .hits .giant{top:40%;background:linear-gradient(90deg,#3E2119,#7a3f1a 60%,#c27216);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hits .sun{position:absolute;z-index:0;width:clamp(260px,40vw,620px);aspect-ratio:1;border-radius:50%;background:var(--orange);right:10%;top:6%}
+  .hits .meta{color:var(--amber)}
+  .sp-top{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;margin-bottom:var(--head-gap)}
+  .sp-top .lead{margin-top:6px;max-width:460px}
+  .sp-num{text-align:right}
+  .sp-num .tag{margin-top:8px;letter-spacing:.12em;font-size:clamp(12px,1.3vw,18px);font-weight:800}
+  .disco{position:relative;z-index:2;background:#121212;color:#fff;padding:clamp(18px,2.4vw,30px);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+  .disco h3{font-size:clamp(18px,1.8vw,24px);font-weight:800;margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .disco h3 a{font-size:12px;font-weight:700;color:#b3b3b3;text-decoration:none;white-space:nowrap}
+  .disco h3 a:hover{color:#fff}
+  .albums{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.6vw,22px)}
+  .album{text-decoration:none;padding:8px;border-radius:6px;transition:background .2s}
+  .album:hover{background:#242424}
+  .album img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;margin-bottom:10px}
+  .album b{display:block;font-size:13px;font-weight:600;line-height:1.3}
+  .album small{display:block;font-size:12px;color:#a7a7a7;margin-top:4px}
+  .hit{margin-top:18px;display:flex;align-items:center;gap:14px;background:#1f1f1f;border-radius:6px;padding:12px 14px;text-decoration:none}
+  .hit img{width:46px;height:46px;border-radius:4px;object-fit:cover}
+  .hit .t{flex:1}
+  .hit .t b{display:block;color:#1ed760;font-weight:700;font-size:14px}
+  .hit .t small{color:#a7a7a7;font-size:12px}
+  .hit .plays{font-variant-numeric:tabular-nums;color:#ddd;font-size:14px;font-weight:600}
+  .hit .pl{width:42px;height:42px;border-radius:50%;background:#1ed760;display:grid;place-items:center;flex:none}
+  .hit .pl::after{content:"";border-left:13px solid #000;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
+  @media (max-width:900px){.albums{grid-template-columns:repeat(3,minmax(0,1fr))}.sp-num{text-align:left}}
+  @media (max-width:520px){.hit .plays{display:none}}
+
+  /* ---------- vídeos ---------- */
+  .yt{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--block-gap);align-items:start}
+  .card{position:relative;display:block;text-decoration:none;background:#000;box-shadow:0 20px 40px -18px rgba(30,10,0,.6);transition:transform .25s}
+  .card:hover{transform:translateY(-6px) rotate(-.4deg)}
+  .card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+  .card .play{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:56px;height:40px;border-radius:10px;background:rgba(254,242,220,.95);display:grid;place-items:center;opacity:0;transition:opacity .2s}
+  .card .play::after{content:"";border-left:16px solid var(--orange);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+  .card:hover .play{opacity:1}
+  .card figcaption{background:#000;color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em;padding:10px 12px;display:flex;justify-content:space-between;gap:8px}
+  .card figcaption span:last-child{color:var(--orange)}
+  .yt-foot{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:var(--head-gap)}
+  @media (max-width:900px){.yt{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+  /* ---------- na mídia ---------- */
+  .midia{background:var(--cream)}
+  .midia .giant{top:22%;background:linear-gradient(90deg,#3E2119,#8a4a1c 55%,#d98a12);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .midia .meta{color:var(--amber)}
+  .midia-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:clamp(16px,3vw,48px);align-items:center}
+  .collage{position:relative;aspect-ratio:1250/1000}
+  .collage a{position:absolute;display:block;box-shadow:0 18px 36px -18px rgba(0,0,0,.55);transition:transform .25s}
+  .collage a:hover{transform:scale(1.04);z-index:9!important}
+  .collage img{width:100%;height:100%;object-fit:cover}
+  .midia-txt .script{font-size:clamp(56px,7vw,110px);background:linear-gradient(90deg,#E8920C,#FFAF00);-webkit-background-clip:text;background-clip:text}
+  .midia-txt p{font-size:clamp(15px,1.2vw,18px);line-height:1.6;margin:8px 0 18px;color:#2a1c12}
+  .midia-txt ul{list-style:none;display:grid;gap:10px}
+  .midia-txt li{font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+  .midia-txt li::before{content:"";width:22px;height:4px;background:var(--orange)}
+  @media (max-width:860px){.midia-grid{grid-template-columns:1fr}.midia-txt{order:-1}}
+
+  /* ---------- contratar ---------- */
+  .contrate{background:#000;color:#fff}
+  .contrate .giant{top:auto;bottom:6%;background:linear-gradient(90deg,#3E2119 0%,#5d3018 40%,#c9781a 75%,#FFAF00);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.55}
+  .contrate .meta{color:#fff}
+  .steps{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--block-gap);margin:0 auto var(--head-gap);max-width:1100px}
+  .step{border-top:4px solid var(--orange);padding-top:16px}
+  .step b{font-family:"Anton",sans-serif;font-weight:400;font-size:44px;color:var(--orange);line-height:1}
+  .step h3{font-size:18px;font-weight:800;margin:6px 0}
+  .step p{font-size:14px;line-height:1.55;color:#cfc4b6}
+  .book{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(24px,4vw,64px);align-items:start}
+  form{background:var(--cream);color:var(--ink);padding:clamp(20px,3vw,40px);box-shadow:0 30px 70px -30px rgba(255,175,0,.35)}
+  form h3{font-weight:900;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.01em;margin-bottom:4px}
+  form .sub{font-size:14px;color:#5a4636;margin-bottom:22px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1/-1}
+  label{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:#6b4a2c}
+  input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid #e6cfa6;padding:.8em .9em;border-radius:0;outline:none;width:100%;transition:border-color .2s,box-shadow .2s}
+  input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,175,0,.25)}
+  textarea{min-height:96px;resize:vertical}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips input{position:absolute;opacity:0;pointer-events:none}
+  .chips label{cursor:pointer;letter-spacing:.04em;text-transform:none;font-size:14px;font-weight:700;color:var(--ink);background:#fff;border:1.5px solid #e6cfa6;padding:.65em 1em;transition:all .15s}
+  .chips input:checked+label{background:var(--orange);border-color:var(--orange)}
+  .chips input:focus-visible+label{box-shadow:0 0 0 3px rgba(255,175,0,.4)}
+  form .btn{width:100%;margin-top:20px;background:var(--wa);color:#04210f;font-size:15px}
+  form .btn:hover{background:#3be37a}
+  .note{font-size:12px;color:#7a6250;margin-top:10px;text-align:center}
+  .err{color:#b3261e;font-size:13px;font-weight:700;margin-top:10px;text-align:center;min-height:1em}
+  .side .photo{position:relative;margin:0 auto 20px;max-width:340px}
+  .side .photo img{width:100%;-webkit-mask-image:linear-gradient(180deg,#000 75%,transparent);mask-image:linear-gradient(180deg,#000 75%,transparent)}
+  .person{display:block;text-decoration:none;text-align:center;margin-bottom:22px}
+  .person .lbl{display:block;background:var(--orange);color:var(--ink);font-weight:700;font-size:15px;padding:.45em .8em;margin-bottom:10px}
+  .person b{display:block;font-weight:700;font-size:16px;margin-bottom:3px}
+  .person span{display:block;font-size:15px;line-height:1.5;opacity:.92}
+  .person:hover .lbl{background:#ffc23d}
+  .presskit{display:block;text-align:center;text-decoration:none;border:2px solid var(--orange);color:var(--orange);font-weight:900;
+    font-size:clamp(18px,1.8vw,24px);letter-spacing:.04em;padding:.8em .4em;transition:all .2s}
+  .presskit small{display:block;font-size:11px;letter-spacing:.24em;font-weight:700;color:#cfc4b6;margin-top:4px}
+  .presskit:hover{background:var(--orange);color:#000}
+  .presskit:hover small{color:#000}
+  @media (max-width:900px){.book{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.side .photo{display:none}}
+  @media (max-width:520px){.grid2{grid-template-columns:1fr}}
+
+  /* ---------- whatsapp flutuante ---------- */
+  .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--wa);display:grid;place-items:center;
+    box-shadow:0 10px 30px -6px rgba(0,0,0,.5);transition:transform .2s,opacity .3s;opacity:0;pointer-events:none}
+  .scrolled .wa-float{opacity:1;pointer-events:auto}
+  .wa-float:hover{transform:scale(1.08)}
+  .wa-float svg{width:30px;height:30px;fill:#fff}
+
+  footer{background:#000;color:#8a8a8a;padding:30px var(--gutter);border-top:1px solid #1d1d1d;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  footer nav{display:flex;gap:18px;flex-wrap:wrap}
+  footer a{text-decoration:none;color:#bbb}
+  footer a:hover{color:var(--orange)}
+
+  /* ---------- extras do site do Pedro ---------- */
+  .numbers .tag.black{background:#1a1a1a}
+  .award{margin:34px auto 0;text-align:center;font-weight:700;letter-spacing:.24em;text-transform:uppercase;font-size:clamp(11px,1.1vw,14px);color:#e9dccb}
+  .award span{color:var(--orange);margin-right:8px}
+  .albums.wide{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .albums.wide .album img{aspect-ratio:16/9}
+  .audience{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--block-gap);margin-top:22px;padding-top:22px;border-top:1px solid #2a2a2a}
+  .aud-t{display:block;font-size:11px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+  .audience p{font-size:14px;color:#ddd;margin-bottom:10px}
+  .audience p b{color:#fff;font-size:18px}
+  .bar{height:8px;background:#2a2a2a;border-radius:4px;overflow:hidden;margin:8px 0 4px}
+  .bar i{display:block;height:100%;background:var(--orange)}
+  .bar.alt i{background:#fff}
+  .audience small{font-size:12px;color:#a7a7a7}
+  .cities{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+  .cities li{font-size:12px;font-weight:600;background:#242424;color:#eee;padding:.45em .75em;border-radius:3px}
+  .press{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.4vw,18px)}
+  .press figure{background:#fff;box-shadow:0 18px 36px -18px rgba(0,0,0,.5);transition:transform .25s;overflow:hidden}
+  .press figure:nth-child(odd){transform:rotate(-1.2deg)}
+  .press figure:nth-child(even){transform:rotate(1deg)}
+  .press figure:hover{transform:scale(1.05) rotate(0);z-index:3;position:relative}
+  .press img{width:100%;aspect-ratio:4/4.2;object-fit:cover;object-position:top}
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
+  .gallery img{width:100%;aspect-ratio:1;object-fit:cover}
+  .hero .who{width:min(46vw,660px)}
+  @media (min-width:901px) and (max-width:1280px){.hero .who{transform:translateX(-5vw)}}
+  /* telas largas: artista centralizado e painel esticado, passando por trás do braço dele */
+  @media (min-width:1281px){
+    .hero .who{width:min(36vw,660px)}
+    .hero .right{z-index:1;left:57vw;right:var(--gutter);width:auto;min-height:min(58vh,540px);
+      display:flex;flex-direction:column;justify-content:center;
+      padding:clamp(32px,3vw,52px) clamp(32px,3vw,56px) clamp(32px,3vw,52px) calc(min(18vw,330px) - 7vw + 32px);
+      border-left:0;border-right:4px solid var(--orange)}
+    .hero .right b{font-size:clamp(38px,3.2vw,56px)}
+    .hero .right p,.hero .right .ctas{max-width:460px}
+  }
+  .side .person{background:#0d0d0d;padding-bottom:16px;box-shadow:0 20px 40px -20px rgba(0,0,0,.9)}
+  .midia-txt{position:relative;z-index:2;background:var(--cream);padding:clamp(22px,2.6vw,38px);border-left:4px solid var(--orange);box-shadow:0 26px 50px -26px rgba(40,15,0,.55)}
+  .midia-txt .script{white-space:nowrap;font-size:clamp(52px,5.6vw,96px)}
+  .midia-txt p{font-weight:500}
+  .show .pic img{width:auto;max-height:min(720px,80vh)}
+  @media (max-width:900px){.hero .who{width:min(96vw,520px)}}
+  @media (max-width:900px){.albums.wide{grid-template-columns:repeat(2,minmax(0,1fr))}.audience{grid-template-columns:1fr}}
+  @media (max-width:860px){.midia .giant{top:auto;bottom:12%}}
+  @media (max-width:520px){.press{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+  /* ---------- no palco (galeria) ---------- */
+  .palco{background:#000;color:#fff}
+  .palco .giant{top:auto;bottom:4%;background:linear-gradient(90deg,#2a1610,#4a2716 35%,#8a4d1c 70%,#c47a18);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.6}
+  .palco .meta{color:#fff}
+  .bento{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(150px,15vw,230px);grid-auto-flow:dense;gap:clamp(8px,1vw,14px)}
+  .tile{position:relative;overflow:hidden;border:0;padding:0;background:#111;cursor:zoom-in;display:block}
+  .tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .3s}
+  .tile:hover img{transform:scale(1.06)}
+  .tile::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 0 var(--orange);transition:box-shadow .2s}
+  .tile:hover::after,.tile:focus-visible::after{box-shadow:inset 0 0 0 4px var(--orange)}
+  .tile.big{grid-column:span 2;grid-row:span 2}
+  .tile.wide{grid-column:span 2}
+  .tile.tall{grid-row:span 2}
+  @media (max-width:760px){.bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px}.tile.big{grid-column:span 2}}
+  .lightbox{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100vw;height:100vh;margin:0}
+  .lightbox::backdrop{background:rgba(0,0,0,.92)}
+  .lightbox[open]{display:flex;align-items:center;justify-content:center}
+  .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.7)}
+  .lb-close,.lb-nav{position:fixed;background:rgba(0,0,0,.6);color:#fff;border:2px solid rgba(255,255,255,.5);cursor:pointer;font:400 34px/1 "Archivo",sans-serif;width:52px;height:52px;display:grid;place-items:center}
+  .lb-close:hover,.lb-nav:hover{background:var(--orange);color:#000;border-color:var(--orange)}
+  .lb-close{top:18px;right:18px}
+  .lb-nav.prev{left:18px;top:50%;transform:translateY(-50%)}
+  .lb-nav.next{right:18px;top:50%;transform:translateY(-50%)}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="brand" href="#topo">PEDRO<br><span>LIBE</span></a>
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+  </button>
+  <ul id="menu">
+    <li><a href="#show">O show</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#sucessos">Sucessos</a></li>
+    <li><a href="#videos">Clipes</a></li>
+    <li><a href="#palco">No palco</a></li>
+    <li><a href="#midia">Na mídia</a></li>
+    <li><a class="cta" href="#contrate">Contrate o show</a></li>
+  </ul>
+</nav>
+
+<!-- CAPA -->
+<header class="hero" id="topo">
+  <div class="giant" aria-hidden="true">AO VIVO</div>
+  <div class="left reveal in">
+    <h1><span class="sr-only">Pedro Libe · </span><span class="script gold">Contrate o show</span></h1>
+    <p class="yr">AGENDA 2026 ABERTA</p>
+  </div>
+  <div class="who"><img src="img/hero-cut.webp" alt="Pedro Libe cantando de jaqueta de couro caramelo e óculos laranja" width="1305" height="1500" fetchpriority="high"></div>
+  <div class="right reveal in">
+    <b>PEDRO LIBE</b>
+    <p>Mais de 40 milhões de streams, finalista do Prêmio Multishow e apadrinhado por Jorge &amp; Mateus. Um espetáculo moderno e emocionante para o seu evento.</p>
+    <div class="ctas">
+      <a class="btn orange" href="#contrate">Solicitar orçamento</a>
+      <a class="btn ghost" href="#videos">Ver os clipes</a>
+    </div>
+  </div>
+  <div class="badge" aria-hidden="true"><i></i>Datas disponíveis</div>
+</header>
+
+<!-- NÚMEROS -->
+<section class="numbers" aria-labelledby="num-t">
+  <h2 id="num-t">Público que acompanha · e que vai até o seu evento</h2>
+  <div class="row reveal">
+    <div><div class="stat" data-count="40" data-fmt="mi">+40 MI</div><span class="tag black">Streams no Spotify</span></div>
+    <div><div class="stat" data-count="37" data-fmt="mi">+37 MI</div><span class="tag black">Views no YouTube</span></div>
+    <div><div class="stat" data-count="100" data-fmt="mil">+100 MIL</div><span class="tag black">Seguidores no Insta</span></div>
+    <div><div class="stat" data-count="2.5" data-fmt="mil1">2,5 MIL</div><span class="tag black">Likes por foto (média)</span></div>
+  </div>
+  <p class="award reveal"><span>★</span> Finalista do Prêmio Multishow 2023 · categoria Brasil</p>
+</section>
+
+<!-- O SHOW -->
+<section class="slide show" id="show">
+  <div class="pic reveal">
+    <span class="jm" aria-hidden="true">PL</span>
+    <img src="img/show-cut.webp" alt="Pedro Libe sorrindo no palco, de jaqueta de couro caramelo" loading="lazy" width="940" height="1500">
+  </div>
+  <div class="reveal">
+    <h2 class="script">O Show</h2>
+    <p>Natural do Tocantins, <strong>Pedro Libe</strong> começou a cantar aos 15 anos nos bares da sua cidade e, aos 17, mudou-se para Goiânia para viver de música. Desde então, levou sua voz a grandes eventos, exposições agropecuárias, festas e casas de show. Na pandemia, conheceu <strong>Jorge &amp; Mateus</strong>, que passaram a acompanhar sua carreira.</p>
+    <p>No palco, ele reúne os sucessos dos projetos <em>Pra Causar · Ao Vivo em Goiânia</em> e <em>Ao Vivo e Valendo</em>, como <em>Nem Balancei</em>, <em>O Copo Não Mente</em>, <em>Na Lata</em> e <em>Ápice do Sentimento</em>. É um <strong>espetáculo moderno, emocionante e de alto nível</strong>, com voz marcante e uma presença de palco que transforma cada apresentação em uma experiência única.</p>
+    <p class="ideal-t">Ideal para</p>
+    <div class="ideal">
+      <span>Exposições agropecuárias</span><span>Grandes eventos</span><span>Festivais</span><span>Casas de show</span><span>Eventos corporativos</span><span>Festas particulares</span>
+    </div>
+    <a class="btn" href="#contrate">Quero esse show no meu evento →</a>
+  </div>
+</section>
+
+<!-- EVENTOS -->
+<section class="slide warm" id="eventos">
+  <div class="giant" aria-hidden="true" style="top:38%">EVENTOS</div>
+  <div class="head reveal">
+    <h2 class="script dark">Para o seu evento</h2>
+    <p class="lead">Do palco de exposição ao evento fechado: a equipe monta a proposta sob medida para o seu público.</p>
+  </div>
+  <div class="formats">
+    <article class="fmt reveal">
+      <div class="img"><img src="img/evt-1.jpg" alt="" loading="lazy"><span class="num">01</span></div>
+      <div class="body">
+        <h3>Exposições &amp; grandes eventos</h3>
+        <p>O show completo, com banda e os sucessos que o público canta do início ao fim. Feito para palcos grandes, festivais e festas de cidade.</p>
+        <ul><li>Show completo com banda</li><li>Para médio e grande porte</li></ul>
+        <a class="btn" href="#contrate" data-format="Exposições &amp; grandes eventos">Quero para o meu evento</a>
+      </div>
+    </article>
+    <article class="fmt reveal">
+      <div class="img"><img src="img/evt-2.jpg" alt="" loading="lazy"><span class="num">02</span></div>
+      <div class="body">
+        <h3>Casas de show &amp; festas</h3>
+        <p>Repertório de hits e energia de pista para casas de show, bares, festas universitárias e eventos com público jovem.</p>
+        <ul><li>Hits e sucessos atuais</li><li>Público jovem e dançante</li></ul>
+        <a class="btn" href="#contrate" data-format="Casas de show &amp; festas">Quero para o meu evento</a>
+      </div>
+    </article>
+    <article class="fmt reveal">
+      <div class="img"><img src="img/evt-3.jpg" alt="" loading="lazy"><span class="num">03</span></div>
+      <div class="body">
+        <h3>Corporativos &amp; particulares</h3>
+        <p>A mesma qualidade de palco adaptada para eventos de empresa, casamentos, aniversários e celebrações exclusivas.</p>
+        <ul><li>Formato sob medida</li><li>Para eventos fechados</li></ul>
+        <a class="btn" href="#contrate" data-format="Corporativos &amp; particulares">Quero para o meu evento</a>
+      </div>
+    </article>
+  </div>
+  <div class="meta"><span>Agenda · 2026</span><span>Pedro Libe</span></div>
+</section>
+
+<!-- SUCESSOS -->
+<section class="slide hits" id="sucessos">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="giant" aria-hidden="true">SUCESSOS</div>
+  <div class="sp-top reveal">
+    <div>
+      <h2 class="script">Sucessos</h2>
+      <p class="lead">Um repertório que o público já conhece e canta junto, com parcerias de peso do sertanejo.</p>
+    </div>
+    <div class="sp-num"><div class="stat" data-count="40" data-fmt="mi">+40 MI</div><span class="tag">De streams</span></div>
+  </div>
+  <div class="disco reveal">
+    <h3>Mais ouvidas <a href="https://open.spotify.com/search/Pedro%20Libe" target="_blank" rel="noopener">Ouvir no Spotify ↗</a></h3>
+    <div class="albums wide">
+      <a class="album" href="https://www.youtube.com/results?search_query=Pedro+Libe+Nem+Balancei" target="_blank" rel="noopener"><img src="img/yt-1.jpg" alt="" loading="lazy"><b>Nem Balancei</b><small>com Jorge &amp; Mateus · 9 mi views</small></a>
+      <a class="album" href="https://www.youtube.com/results?search_query=Pedro+Libe+O+Copo+N%C3%A3o+Mente" target="_blank" rel="noopener"><img src="img/yt-2.jpg" alt="" loading="lazy"><b>O Copo Não Mente</b><small>com Hugo &amp; Guilherme · 2,7 mi views</small></a>
+      <a class="album" href="https://www.youtube.com/results?search_query=Pedro+Libe+%C3%81pice+do+Sentimento" target="_blank" rel="noopener"><img src="img/yt-5.jpg" alt="" loading="lazy"><b>Ápice do Sentimento</b><small>com Ícaro &amp; Gilmar · 2,6 mi views</small></a>
+      <a class="album" href="https://www.youtube.com/results?search_query=Pedro+Libe+Pra+Voc%C3%AA+Lembrar+de+Mim+Labirinto" target="_blank" rel="noopener"><img src="img/yt-6.jpg" alt="" loading="lazy"><b>Pra Você Lembrar de Mim / Labirinto</b><small>com Fred &amp; Fabrício · 2,2 mi views</small></a>
+    </div>
+    <div class="audience">
+      <div>
+        <span class="aud-t">Quem ouve no Spotify</span>
+        <p><b>18–24 anos</b></p>
+        <div class="bar"><i style="width:64%"></i></div><small>64% mulheres</small>
+        <div class="bar alt"><i style="width:30%"></i></div><small>30% homens</small>
+      </div>
+      <div>
+        <span class="aud-t">Top cidades</span>
+        <ul class="cities"><li>São Paulo</li><li>Rio de Janeiro</li><li>Belo Horizonte</li><li>Campinas</li><li>Porto Alegre</li><li>Curitiba</li><li>Brasília</li><li>Fortaleza</li><li>Recife</li><li>Salvador</li><li>Lisboa</li></ul>
+      </div>
+      <div>
+        <span class="aud-t">Quem segue no Instagram</span>
+        <p><b>18–34 anos</b> · 68,9% mulheres</p>
+        <ul class="cities"><li>Goiânia</li><li>São Paulo</li><li>Belo Horizonte</li><li>Palmas</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="meta"><span>Agenda · 2026</span><span>Pedro Libe</span></div>
+</section>
+
+<!-- CLIPES -->
+<section class="slide warm" id="videos">
+  <div class="giant" aria-hidden="true" style="top:44%">CLIPES</div>
+  <div class="head reveal">
+    <h2 class="script dark">Veja ao vivo</h2>
+    <p class="lead">Mais de <strong>37 milhões de visualizações</strong> no YouTube. Assista e sinta a energia do show.</p>
+  </div>
+  <div class="yt">
+    <a class="card reveal" href="https://www.youtube.com/results?search_query=Pedro+Libe+Jorge+e+Mateus+Nem+Balancei" target="_blank" rel="noopener"><span class="play"></span>
+      <figure><img src="img/yt-1.jpg" alt="Clipe: Nem Balancei, com Jorge &amp; Mateus" loading="lazy"><figcaption><span>Nem Balancei · Jorge &amp; Mateus</span><span>▶</span></figcaption></figure></a>
+    <a class="card reveal" href="https://www.youtube.com/results?search_query=Pedro+Libe+Na+Lata+Fred+e+Fabr%C3%ADcio" target="_blank" rel="noopener"><span class="play"></span>
+      <figure><img src="img/yt-3.jpg" alt="Clipe: Na Lata, com Fred &amp; Fabrício" loading="lazy"><figcaption><span>Na Lata · Fred &amp; Fabrício</span><span>▶</span></figcaption></figure></a>
+    <a class="card reveal" href="https://www.youtube.com/results?search_query=Pedro+Libe+N%C3%A3o+Sou+Mais+Seu" target="_blank" rel="noopener"><span class="play"></span>
+      <figure><img src="img/yt-4.jpg" alt="Clipe: Não Sou Mais Seu, com Juan Marcus &amp; Vinícius" loading="lazy"><figcaption><span>Não Sou Mais Seu · Juan Marcus &amp; Vinícius</span><span>▶</span></figcaption></figure></a>
+    <a class="card reveal" href="https://www.youtube.com/results?search_query=Pedro+Libe+O+Copo+N%C3%A3o+Mente" target="_blank" rel="noopener"><span class="play"></span>
+      <figure><img src="img/yt-2.jpg" alt="Clipe: O Copo Não Mente, com Hugo &amp; Guilherme" loading="lazy"><figcaption><span>O Copo Não Mente · Hugo &amp; Guilherme</span><span>▶</span></figcaption></figure></a>
+  </div>
+  <div class="yt-foot">
+    <a class="btn" href="https://www.youtube.com/results?search_query=Pedro+Libe" target="_blank" rel="noopener">Ver todos no YouTube ↗</a>
+    <a class="btn orange" href="#contrate">Quero esse show</a>
+  </div>
+  <div class="meta"><span>Agenda · 2026</span><span>Pedro Libe</span></div>
+</section>
+
+<!-- NO PALCO -->
+<section class="slide palco" id="palco">
+  <div class="giant" aria-hidden="true">NO PALCO</div>
+  <div class="head reveal">
+    <h2 class="script gold">No palco</h2>
+    <p class="lead" style="color:#e9dccb">Navio Jorge &amp; Mateus, Contagem (MG) e palcos pelo Brasil. É assim que o show chega ao seu público.</p>
+  </div>
+  <div class="bento reveal">
+      <button class="tile big" data-full="img/show-01.jpg" aria-label="Ampliar foto: Palco com o telão PEDRO LIBE e o público"><img src="img/show-01.jpg" alt="Palco com o telão PEDRO LIBE e o público" loading="lazy"></button>
+      <button class="tile " data-full="img/show-02.jpg" aria-label="Ampliar foto: Pedro Libe cantando diante do letreiro neon vermelho"><img src="img/show-02.jpg" alt="Pedro Libe cantando diante do letreiro neon vermelho" loading="lazy"></button>
+      <button class="tile tall" data-full="img/show-03.jpg" aria-label="Ampliar foto: Pedro Libe em pose de palco sob luzes roxas"><img src="img/show-03.jpg" alt="Pedro Libe em pose de palco sob luzes roxas" loading="lazy"></button>
+      <button class="tile " data-full="img/show-04.jpg" aria-label="Ampliar foto: Público com as mãos para cima diante de Pedro Libe"><img src="img/show-04.jpg" alt="Público com as mãos para cima diante de Pedro Libe" loading="lazy"></button>
+      <button class="tile tall" data-full="img/show-05.jpg" aria-label="Ampliar foto: Pedro Libe no palco com o letreiro PEDRO LIBE ao fundo"><img src="img/show-05.jpg" alt="Pedro Libe no palco com o letreiro PEDRO LIBE ao fundo" loading="lazy"></button>
+      <button class="tile wide" data-full="img/show-06.jpg" aria-label="Ampliar foto: Pedro Libe sob lasers vermelhos"><img src="img/show-06.jpg" alt="Pedro Libe sob lasers vermelhos" loading="lazy"></button>
+      <button class="tile tall" data-full="img/show-07.jpg" aria-label="Ampliar foto: Pedro Libe de chapéu, em close, sob luz azul"><img src="img/show-07.jpg" alt="Pedro Libe de chapéu, em close, sob luz azul" loading="lazy"></button>
+      <button class="tile " data-full="img/show-08.jpg" aria-label="Ampliar foto: Pedro Libe e banda diante de um coração em neon"><img src="img/show-08.jpg" alt="Pedro Libe e banda diante de um coração em neon" loading="lazy"></button>
+      <button class="tile wide" data-full="img/show-09.jpg" aria-label="Ampliar foto: Letreiro laranja PEDRO LIBE iluminando o palco"><img src="img/show-09.jpg" alt="Letreiro laranja PEDRO LIBE iluminando o palco" loading="lazy"></button>
+      <button class="tile " data-full="img/show-10.jpg" aria-label="Ampliar foto: Pedro Libe diante de círculos de neon vermelho"><img src="img/show-10.jpg" alt="Pedro Libe diante de círculos de neon vermelho" loading="lazy"></button>
+      <button class="tile tall" data-full="img/show-11.jpg" aria-label="Ampliar foto: Pedro Libe de chapéu cantando, em close"><img src="img/show-11.jpg" alt="Pedro Libe de chapéu cantando, em close" loading="lazy"></button>
+      <button class="tile " data-full="img/show-12.jpg" aria-label="Ampliar foto: Pedro Libe tocando violão entre a fumaça"><img src="img/show-12.jpg" alt="Pedro Libe tocando violão entre a fumaça" loading="lazy"></button>
+      <button class="tile wide" data-full="img/show-13.jpg" aria-label="Ampliar foto: Multidão diante do palco de Pedro Libe"><img src="img/show-13.jpg" alt="Multidão diante do palco de Pedro Libe" loading="lazy"></button>
+      <button class="tile " data-full="img/show-14.jpg" aria-label="Ampliar foto: Pedro Libe sorrindo no palco"><img src="img/show-14.jpg" alt="Pedro Libe sorrindo no palco" loading="lazy"></button>
+  </div>
+  <div class="meta"><span>Agenda · 2026</span><span>Pedro Libe</span></div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Foto ampliada">
+  <button class="lb-close" aria-label="Fechar">×</button>
+  <button class="lb-nav prev" aria-label="Foto anterior">‹</button>
+  <img alt="">
+  <button class="lb-nav next" aria-label="Próxima foto">›</button>
+</dialog>
+
+<!-- NA MÍDIA -->
+<section class="slide midia" id="midia">
+  <div class="giant" aria-hidden="true">MÍDIA</div>
+  <div class="midia-grid">
+    <div class="press reveal">
+      <figure><img src="img/press-1.jpg" alt="Matéria: Dono do hit Nem Balancei, Pedro Libe revela como conheceu Jorge &amp; Mateus" loading="lazy"></figure>
+      <figure><img src="img/press-2.jpg" alt="Matéria: Pedro Libe lança Nem Balancei ao vivo com participação de Jorge &amp; Mateus" loading="lazy"></figure>
+      <figure><img src="img/press-3.jpg" alt="Matéria: Curitiba sempre abraçou o meu projeto, diz Pedro Libe" loading="lazy"></figure>
+      <figure><img src="img/press-4.jpg" alt="Matéria: Pedro Libe lança Enredo, música do álbum Ao Vivo &amp; Valendo" loading="lazy"></figure>
+      <figure><img src="img/press-5.jpg" alt="Comunicado: Pedro Libe lança single Na Lata em parceria com Fred &amp; Fabrício" loading="lazy"></figure>
+      <figure><img src="img/press-6.jpg" alt="Matéria em portal de notícias sobre Pedro Libe" loading="lazy"></figure>
+    </div>
+    <div class="midia-txt reveal">
+      <h2 class="script">Tá na Mídia</h2>
+      <p>Lançamentos, parcerias e shows de Pedro Libe ganham espaço nos principais portais de entretenimento do país. É credibilidade para o seu evento.</p>
+      <ul><li>Prêmio Multishow 2023</li><li>Portal Leo Dias</li><li>Parcerias com Jorge &amp; Mateus</li><li>Festivais pelo Brasil</li></ul>
+    </div>
+  </div>
+  <div class="meta"><span>Agenda · 2026</span><span>Pedro Libe</span></div>
+</section>
+
+<!-- CONTRATE -->
+<section class="slide contrate" id="contrate">
+  <div class="giant" aria-hidden="true">CONTRATE</div>
+  <div class="head reveal">
+    <h2 class="script gold">Contrate o show</h2>
+    <p class="lead" style="color:#e9dccb">Conte os detalhes do seu evento. A equipe de agenda responde pelo WhatsApp com disponibilidade e proposta.</p>
+  </div>
+  <div class="steps reveal">
+    <div class="step"><b>01</b><h3>Envie os dados</h3><p>Preencha data, cidade e tipo de evento no formulário abaixo.</p></div>
+    <div class="step"><b>02</b><h3>Receba a proposta</h3><p>A agenda confirma a disponibilidade e envia os valores e o formato ideal.</p></div>
+    <div class="step"><b>03</b><h3>Feche a data</h3><p>Contrato assinado e data garantida. Agora é só preparar a festa.</p></div>
+  </div>
+
+  <div class="book">
+    <form id="bookForm" class="reveal" novalidate>
+      <h3>Solicite seu orçamento</h3>
+      <p class="sub">Leva menos de 1 minuto. Os campos com * são obrigatórios.</p>
+      <div class="grid2">
+        <div class="field"><label for="f-nome">Seu nome *</label><input id="f-nome" name="nome" autocomplete="name" required></div>
+        <div class="field"><label for="f-tel">WhatsApp *</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required></div>
+        <div class="field"><label for="f-cidade">Cidade / UF do evento *</label><input id="f-cidade" name="cidade" placeholder="Ex.: Goiânia / GO" required></div>
+        <div class="field"><label for="f-data">Data do evento *</label><input id="f-data" name="data" type="date" required></div>
+        <div class="field"><label for="f-tipo">Tipo de evento *</label>
+          <select id="f-tipo" name="tipo" required>
+            <option value="">Selecione…</option>
+            <option>Exposição agropecuária</option><option>Festival</option><option>Evento de prefeitura</option><option>Casa de show / Bar</option>
+            <option>Festa universitária</option><option>Evento corporativo</option><option>Casamento / Festa particular</option><option>Outro</option>
+          </select></div>
+        <div class="field"><label for="f-publico">Público estimado</label>
+          <select id="f-publico" name="publico">
+            <option value="">Selecione…</option><option>Até 300 pessoas</option><option>300 a 1.000 pessoas</option><option>1.000 a 5.000 pessoas</option><option>Mais de 5.000 pessoas</option>
+          </select></div>
+        <div class="field full"><label>Porte do evento</label>
+          <div class="chips" role="radiogroup">
+            <input type="radio" name="formato" id="fm1" value="Exposições &amp; grandes eventos" checked><label for="fm1">Exposições &amp; grandes eventos</label>
+            <input type="radio" name="formato" id="fm2" value="Casas de show &amp; festas"><label for="fm2">Casas de show &amp; festas</label>
+            <input type="radio" name="formato" id="fm3" value="Corporativos &amp; particulares"><label for="fm3">Corporativos &amp; particulares</label>
+          </div></div>
+        <div class="field full"><label for="f-msg">Detalhes (opcional)</label><textarea id="f-msg" name="msg" placeholder="Local, horário, estrutura de palco e som, outras atrações…"></textarea></div>
+      </div>
+      <button class="btn" type="submit">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.8-1.1-4.6-4-4.8-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>
+        Enviar pelo WhatsApp</button>
+      <p class="err" id="formErr" role="alert"></p>
+      <p class="note">Você será levado ao WhatsApp da agenda com a mensagem pronta. É só tocar em enviar.</p>
+    </form>
+
+    <aside class="side reveal">
+      <div class="gallery" aria-label="Pedro Libe no palco">
+        <img src="img/side-1.jpg" alt="" loading="lazy"><img src="img/side-2.jpg" alt="" loading="lazy">
+        <img src="img/side-3.jpg" alt="" loading="lazy"><img src="img/side-4.jpg" alt="" loading="lazy">
+      </div>
+      <a class="person" id="agendaCard" href="#contrate"><span class="lbl">Agenda de shows</span><b data-agenda-nome>Giovani Maltta</b><span data-agenda-tel>(62) 9644-3234</span></a>
+      <a class="person" href="https://www.youtube.com/results?search_query=Pedro+Libe" target="_blank" rel="noopener"><span class="lbl">Conheça o artista</span><b>+37 milhões de views</b><span>Clipes e shows no YouTube</span></a>
+    </aside>
+  </div>
+  <div class="meta"><span>Agenda · 2026</span><span>Pedro Libe</span></div>
+</section>
+
+<footer>
+  <span>© 2026 Pedro Libe</span>
+  <nav aria-label="Plataformas">
+    <a href="https://open.spotify.com/search/Pedro%20Libe" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://www.youtube.com/results?search_query=Pedro+Libe" target="_blank" rel="noopener">YouTube</a>
+  </nav>
+</footer>
+
+<a class="wa-float" href="#contrate" aria-label="Contratar o show pelo WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.8-1.1-4.6-4-4.8-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>
+</a>
+
+<script>
+  // ===== CONFIGURE AQUI =====
+  // Número da agenda que recebe os pedidos (só dígitos, com 55 + DDD). Ex.: '5562999990000'
+  const WHATSAPP_AGENDA = '556296443234';
+  const AGENDA_NOME = 'Giovani Maltta';
+  const AGENDA_TEL_VISIVEL = '(62) 9644-3234';
+  // ==========================
+
+  document.querySelector('[data-agenda-nome]').textContent = AGENDA_NOME;
+  document.querySelector('[data-agenda-tel]').textContent = AGENDA_TEL_VISIVEL;
+  if (WHATSAPP_AGENDA) { const c = document.getElementById('agendaCard'); c.href = `https://wa.me/${WHATSAPP_AGENDA}`; c.target = '_blank'; c.rel = 'noopener'; }
+
+  // nav
+  const nav = document.getElementById('nav'), btn = document.getElementById('menuBtn');
+  const onScroll = () => { nav.classList.toggle('solid', scrollY > 40); document.body.classList.toggle('scrolled', scrollY > innerHeight * .6); };
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  btn.addEventListener('click', () => { const o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+  document.querySelectorAll('#menu a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); btn.setAttribute('aria-expanded', false); }));
+
+  document.querySelectorAll('[data-format]').forEach(b => b.addEventListener('click', () => {
+    const r = [...document.querySelectorAll('input[name="formato"]')].find(i => i.value === b.dataset.format); if (r) r.checked = true;
+  }));
+
+  const d = document.getElementById('f-data'); d.min = new Date().toISOString().slice(0,10);
+
+  const form = document.getElementById('bookForm'), err = document.getElementById('formErr');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const f = new FormData(form), v = k => (f.get(k) || '').toString().trim();
+    const missing = [['nome','seu nome'],['tel','WhatsApp'],['cidade','cidade'],['data','data'],['tipo','tipo de evento']].filter(([k]) => !v(k));
+    if (missing.length) { err.textContent = 'Preencha: ' + missing.map(m => m[1]).join(', ') + '.'; form.querySelector(`[name="${missing[0][0]}"]`).focus(); return; }
+    if (!WHATSAPP_AGENDA) { err.textContent = 'O número da agenda ainda não foi configurado no site.'; return; }
+    err.textContent = '';
+    const data = v('data').split('-').reverse().join('/');
+    const linhas = [
+      'Olá! Quero um orçamento para o show do *Pedro Libe*.', '',
+      `*Nome:* ${v('nome')}`, `*WhatsApp:* ${v('tel')}`, `*Cidade/UF:* ${v('cidade')}`, `*Data:* ${data}`,
+      `*Tipo de evento:* ${v('tipo')}`, v('publico') ? `*Público estimado:* ${v('publico')}` : null, `*Porte:* ${v('formato')}`,
+      v('msg') ? `*Detalhes:* ${v('msg')}` : null, '', '(enviado pelo site)'
+    ].filter(x => x !== null);
+    window.open(`https://wa.me/${WHATSAPP_AGENDA}?text=${encodeURIComponent(linhas.join('\n'))}`, '_blank', 'noopener');
+  });
+
+  document.getElementById('f-tel').addEventListener('input', e => {
+    let n = e.target.value.replace(/\D/g,'').slice(0,11);
+    e.target.value = n.length > 6 ? `(${n.slice(0,2)}) ${n.slice(2,n.length-4)}-${n.slice(-4)}` : n.length > 2 ? `(${n.slice(0,2)}) ${n.slice(2)}` : n;
+  });
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = (v, f) => {
+    if (f === 'mil') return '+' + Math.round(v) + ' MIL';
+    if (f === 'mil1') return v.toFixed(1).replace('.', ',') + ' MIL';
+    if (f === 'mi') return '+' + Math.floor(v) + ' MI';
+    return '+' + Math.round(v).toLocaleString('pt-BR');
+  };
+  const count = el => {
+    const end = parseFloat(el.dataset.count), f = el.dataset.fmt, t0 = performance.now(), dur = 1600;
+    const step = t => { const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(end * e, f); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    if (!reduce) e.target.querySelectorAll('[data-count]').forEach(count);
+    io.unobserve(e.target);
+  }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // galeria: ampliar fotos
+  const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img'), tiles = [...document.querySelectorAll('.tile')];
+  let cur = 0;
+  const show = i => { cur = (i + tiles.length) % tiles.length; const t = tiles[cur]; lbImg.src = t.dataset.full; lbImg.alt = t.querySelector('img').alt; };
+  tiles.forEach((t, i) => t.addEventListener('click', () => { show(i); lb.showModal(); }));
+  lb.querySelector('.lb-close').addEventListener('click', () => lb.close());
+  lb.querySelector('.prev').addEventListener('click', () => show(cur - 1));
+  lb.querySelector('.next').addEventListener('click', () => show(cur + 1));
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); });
+</script>
+</body>
+</html>

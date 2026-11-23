@@ -391,6 +391,23 @@
   .lb-nav.prev{left:18px;top:50%;transform:translateY(-50%)}
   .lb-nav.next{right:18px;top:50%;transform:translateY(-50%)}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1502819165328810');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1502819165328810&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -699,6 +716,15 @@
   document.querySelector('[data-agenda-tel]').textContent = AGENDA_TEL_VISIVEL;
   if (WHATSAPP_AGENDA) { const c = document.getElementById('agendaCard'); c.href = `https://wa.me/${WHATSAPP_AGENDA}`; c.target = '_blank'; c.rel = 'noopener'; }
 
+  // ===== Meta Pixel: eventos de conversão =====
+  const track = (ev, params) => { try { if (window.fbq) fbq('track', ev, params || {}); } catch (_) {} };
+  // Contact: abriu o WhatsApp direto pelo cartão da agenda
+  document.getElementById('agendaCard').addEventListener('click', () => { if (WHATSAPP_AGENDA) track('Contact', {content_name: 'Cartão agenda WhatsApp'}); });
+  // ViewContent: chegou na seção de contratação (uma vez por visita)
+  const contrateSec = document.getElementById('contrate');
+  if (contrateSec) { const vio = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { track('ViewContent', {content_name: 'Seção Contrate'}); vio.disconnect(); } }, {threshold: .25}); vio.observe(contrateSec); }
+  let leadSent = false;
+
   // nav
   const nav = document.getElementById('nav'), btn = document.getElementById('menuBtn');
   const onScroll = () => { nav.classList.toggle('solid', scrollY > 40); document.body.classList.toggle('scrolled', scrollY > innerHeight * .6); };
@@ -727,6 +753,8 @@
       `*Tipo de evento:* ${v('tipo')}`, v('publico') ? `*Público estimado:* ${v('publico')}` : null, `*Porte:* ${v('formato')}`,
       v('msg') ? `*Detalhes:* ${v('msg')}` : null, '', '(enviado pelo site)'
     ].filter(x => x !== null);
+    // Lead: pedido de orçamento válido (sem nome/telefone; só tipo de evento, porte e cidade)
+    if (!leadSent) { leadSent = true; track('Lead', {content_name: 'Orçamento de show', content_category: v('tipo'), formato: v('formato'), cidade: v('cidade')}); }
     window.open(`https://wa.me/${WHATSAPP_AGENDA}?text=${encodeURIComponent(linhas.join('\n'))}`, '_blank', 'noopener');
   });
 

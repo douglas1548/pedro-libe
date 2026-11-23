@@ -290,6 +290,11 @@
   .chips label{cursor:pointer;letter-spacing:.04em;text-transform:none;font-size:14px;font-weight:700;color:var(--ink);background:#fff;border:1.5px solid #e6cfa6;padding:.65em 1em;transition:all .15s}
   .chips input:checked+label{background:var(--orange);border-color:var(--orange)}
   .chips input:focus-visible+label{box-shadow:0 0 0 3px rgba(255,175,0,.4)}
+  .chips.assunto{margin-bottom:18px}
+  .only-comp{display:none}
+  #bookForm[data-mode="comp"] .only-show{display:none}
+  #bookForm[data-mode="comp"] .only-comp{display:flex}
+  #bookForm[data-mode="comp"] p.only-comp{display:block}
   form .btn{width:100%;margin-top:20px;background:var(--wa);color:#04210f;font-size:15px}
   form .btn:hover{background:#3be37a}
   .note{font-size:12px;color:#7a6250;margin-top:10px;text-align:center}
@@ -490,7 +495,7 @@ src="https://www.facebook.com/tr?id=1502819165328810&ev=PageView&noscript=1"
         <h3>Exposições &amp; grandes eventos</h3>
         <p>O show completo, com banda e os sucessos que o público canta do início ao fim. Feito para palcos grandes, festivais e festas de cidade.</p>
         <ul><li>Show completo com banda</li><li>Para médio e grande porte</li></ul>
-        <a class="btn" href="#contrate" data-format="Exposições &amp; grandes eventos">Quero para o meu evento</a>
+        <a class="btn" href="#contrate" data-tipo="Exposição agropecuária">Quero para o meu evento</a>
       </div>
     </article>
     <article class="fmt reveal">
@@ -499,7 +504,7 @@ src="https://www.facebook.com/tr?id=1502819165328810&ev=PageView&noscript=1"
         <h3>Casas de show &amp; festas</h3>
         <p>Repertório de hits e energia de pista para casas de show, bares, festas universitárias e eventos com público jovem.</p>
         <ul><li>Hits e sucessos atuais</li><li>Público jovem e dançante</li></ul>
-        <a class="btn" href="#contrate" data-format="Casas de show &amp; festas">Quero para o meu evento</a>
+        <a class="btn" href="#contrate" data-tipo="Casa de show / Bar">Quero para o meu evento</a>
       </div>
     </article>
     <article class="fmt reveal">
@@ -508,7 +513,7 @@ src="https://www.facebook.com/tr?id=1502819165328810&ev=PageView&noscript=1"
         <h3>Corporativos &amp; particulares</h3>
         <p>A mesma qualidade de palco adaptada para eventos de empresa, casamentos, aniversários e celebrações exclusivas.</p>
         <ul><li>Formato sob medida</li><li>Para eventos fechados</li></ul>
-        <a class="btn" href="#contrate" data-format="Corporativos &amp; particulares">Quero para o meu evento</a>
+        <a class="btn" href="#contrate" data-tipo="Evento corporativo">Quero para o meu evento</a>
       </div>
     </article>
   </div>
@@ -648,29 +653,29 @@ src="https://www.facebook.com/tr?id=1502819165328810&ev=PageView&noscript=1"
 
   <div class="book">
     <form id="bookForm" class="reveal" novalidate>
-      <h3>Solicite seu orçamento</h3>
-      <p class="sub">Leva menos de 1 minuto. Os campos com * são obrigatórios.</p>
+      <div class="chips assunto" role="radiogroup" aria-label="Assunto">
+        <input type="radio" name="assunto" id="as1" value="show" checked><label for="as1">Quero contratar o show</label>
+        <input type="radio" name="assunto" id="as2" value="comp"><label for="as2">Sou compositor(a)</label>
+      </div>
+      <h3 data-t-show="Solicite seu orçamento" data-t-comp="Envie sua composição">Solicite seu orçamento</h3>
+      <p class="sub only-show">Leva menos de 1 minuto. Os campos com * são obrigatórios.</p>
+      <p class="sub only-comp">Este formulário é para contratação de shows. Composições são recebidas pela equipe e avaliadas sem prazo de retorno.</p>
       <div class="grid2">
         <div class="field"><label for="f-nome">Seu nome *</label><input id="f-nome" name="nome" autocomplete="name" required></div>
         <div class="field"><label for="f-tel">WhatsApp *</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(00) 00000-0000" required></div>
-        <div class="field"><label for="f-cidade">Cidade / UF do evento *</label><input id="f-cidade" name="cidade" placeholder="Ex.: Goiânia / GO" required></div>
-        <div class="field"><label for="f-data">Data do evento *</label><input id="f-data" name="data" type="date" required></div>
-        <div class="field"><label for="f-tipo">Tipo de evento *</label>
+        <div class="only-show field"><label for="f-cidade">Cidade / UF do evento *</label><input id="f-cidade" name="cidade" placeholder="Ex.: Goiânia / GO" required></div>
+        <div class="only-show field"><label for="f-data">Data do evento *</label><input id="f-data" name="data" type="date" required></div>
+        <div class="only-show field"><label for="f-tipo">Tipo de evento *</label>
           <select id="f-tipo" name="tipo" required>
             <option value="">Selecione…</option>
             <option>Exposição agropecuária</option><option>Festival</option><option>Evento de prefeitura</option><option>Casa de show / Bar</option>
             <option>Festa universitária</option><option>Evento corporativo</option><option>Casamento / Festa particular</option><option>Outro</option>
           </select></div>
-        <div class="field"><label for="f-publico">Público estimado</label>
+        <div class="only-show field"><label for="f-publico">Público estimado</label>
           <select id="f-publico" name="publico">
             <option value="">Selecione…</option><option>Até 300 pessoas</option><option>300 a 1.000 pessoas</option><option>1.000 a 5.000 pessoas</option><option>Mais de 5.000 pessoas</option>
           </select></div>
-        <div class="field full"><label>Porte do evento</label>
-          <div class="chips" role="radiogroup">
-            <input type="radio" name="formato" id="fm1" value="Exposições &amp; grandes eventos" checked><label for="fm1">Exposições &amp; grandes eventos</label>
-            <input type="radio" name="formato" id="fm2" value="Casas de show &amp; festas"><label for="fm2">Casas de show &amp; festas</label>
-            <input type="radio" name="formato" id="fm3" value="Corporativos &amp; particulares"><label for="fm3">Corporativos &amp; particulares</label>
-          </div></div>
+        <div class="only-comp field full"><label for="f-link">Link da música (YouTube, Drive, SoundCloud…)</label><input id="f-link" name="link" type="url" inputmode="url" placeholder="https://"></div>
         <div class="field full"><label for="f-msg">Detalhes (opcional)</label><textarea id="f-msg" name="msg" placeholder="Local, horário, estrutura de palco e som, outras atrações…"></textarea></div>
       </div>
       <button class="btn" type="submit">
@@ -732,29 +737,49 @@ src="https://www.facebook.com/tr?id=1502819165328810&ev=PageView&noscript=1"
   btn.addEventListener('click', () => { const o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
   document.querySelectorAll('#menu a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); btn.setAttribute('aria-expanded', false); }));
 
-  document.querySelectorAll('[data-format]').forEach(b => b.addEventListener('click', () => {
-    const r = [...document.querySelectorAll('input[name="formato"]')].find(i => i.value === b.dataset.format); if (r) r.checked = true;
+  document.querySelectorAll('[data-tipo]').forEach(b => b.addEventListener('click', () => {
+    const t = document.getElementById('f-tipo'); if ([...t.options].some(o => o.value === b.dataset.tipo)) t.value = b.dataset.tipo;
   }));
 
   const d = document.getElementById('f-data'); d.min = new Date().toISOString().slice(0,10);
 
   const form = document.getElementById('bookForm'), err = document.getElementById('formErr');
+  // Assunto: contratar o show x compositor (compositor não conta como Lead no Meta)
+  const h3 = form.querySelector('h3');
+  const msgBox = document.getElementById('f-msg'), msgPh = msgBox.placeholder;
+  const setMode = m => { form.dataset.mode = m; h3.textContent = h3.dataset[m === 'comp' ? 'tComp' : 'tShow']; err.textContent = '';
+    msgBox.placeholder = m === 'comp' ? 'Nome da música, estilo, se já tem guia gravada…' : msgPh; };
+  form.querySelectorAll('input[name="assunto"]').forEach(r => r.addEventListener('change', () => setMode(r.value)));
+  let compSent = false;
+
   form.addEventListener('submit', e => {
     e.preventDefault();
     const f = new FormData(form), v = k => (f.get(k) || '').toString().trim();
+    if (!WHATSAPP_AGENDA) { err.textContent = 'O número da agenda ainda não foi configurado no site.'; return; }
+    if (v('assunto') === 'comp') {
+      const faltam = [['nome','seu nome'],['tel','WhatsApp']].filter(([k]) => !v(k));
+      if (faltam.length) { err.textContent = 'Preencha: ' + faltam.map(m => m[1]).join(', ') + '.'; form.querySelector(`[name="${faltam[0][0]}"]`).focus(); return; }
+      err.textContent = '';
+      const txt = ['Olá! Sou compositor(a) e gostaria de apresentar uma música para o *Pedro Libe*.', '',
+        `*Nome:* ${v('nome')}`, `*WhatsApp:* ${v('tel')}`, v('link') ? `*Música:* ${v('link')}` : null,
+        v('msg') ? `*Detalhes:* ${v('msg')}` : null, '', '(COMPOSIÇÃO · enviado pelo site)'].filter(x => x !== null);
+      // evento personalizado: NÃO é Lead, não entra na otimização da campanha
+      if (!compSent) { compSent = true; try { if (window.fbq) fbq('trackCustom', 'Compositor'); } catch (_) {} }
+      window.open(`https://wa.me/${WHATSAPP_AGENDA}?text=${encodeURIComponent(txt.join('\n'))}`, '_blank', 'noopener');
+      return;
+    }
     const missing = [['nome','seu nome'],['tel','WhatsApp'],['cidade','cidade'],['data','data'],['tipo','tipo de evento']].filter(([k]) => !v(k));
     if (missing.length) { err.textContent = 'Preencha: ' + missing.map(m => m[1]).join(', ') + '.'; form.querySelector(`[name="${missing[0][0]}"]`).focus(); return; }
-    if (!WHATSAPP_AGENDA) { err.textContent = 'O número da agenda ainda não foi configurado no site.'; return; }
     err.textContent = '';
     const data = v('data').split('-').reverse().join('/');
     const linhas = [
       'Olá! Quero um orçamento para o show do *Pedro Libe*.', '',
       `*Nome:* ${v('nome')}`, `*WhatsApp:* ${v('tel')}`, `*Cidade/UF:* ${v('cidade')}`, `*Data:* ${data}`,
-      `*Tipo de evento:* ${v('tipo')}`, v('publico') ? `*Público estimado:* ${v('publico')}` : null, `*Porte:* ${v('formato')}`,
+      `*Tipo de evento:* ${v('tipo')}`, v('publico') ? `*Público estimado:* ${v('publico')}` : null,
       v('msg') ? `*Detalhes:* ${v('msg')}` : null, '', '(enviado pelo site)'
     ].filter(x => x !== null);
     // Lead: pedido de orçamento válido (sem nome/telefone; só tipo de evento, porte e cidade)
-    if (!leadSent) { leadSent = true; track('Lead', {content_name: 'Orçamento de show', content_category: v('tipo'), formato: v('formato'), cidade: v('cidade')}); }
+    if (!leadSent) { leadSent = true; track('Lead', {content_name: 'Orçamento de show', content_category: v('tipo'), cidade: v('cidade')}); }
     window.open(`https://wa.me/${WHATSAPP_AGENDA}?text=${encodeURIComponent(linhas.join('\n'))}`, '_blank', 'noopener');
   });
 
